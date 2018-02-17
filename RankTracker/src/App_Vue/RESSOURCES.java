@@ -1,25 +1,40 @@
 package App_Vue;
 
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import App_Model.LISTE_HERO;
 
 public class RESSOURCES {
 	
-	public static final String HERO_ICON_REP = "src/assets/img/HeroIcon_",
-			HERO_ICON_ANA = HERO_ICON_REP + "Ana.png",
-			HERO_ICON_Moira = HERO_ICON_REP + "Moira.png",
-			HERO_ICON_Junkrat = HERO_ICON_REP + "Junkrat.png",
-			HERO_ICON_Zenyatta = HERO_ICON_REP + "Zenyatta.png";
+	public static final String[] heroListe = {"Ana","Bastion","Doomfist","Dva","Genji","Hanzo","Junkrat","Lucio","Mccree","Mei",
+											  "Mercy","Moira","Orisa","Pharah","Reaper","Reinhardt","Roadhog","Soldier","Sombra",
+											  "Symmetra","Torbjorn","Tracer","Widowmaker","Winston","Zarya","Zenyatta"},
+								 mapListe  = {"Anubis","Dorado","einchenwald","Gibraltar","Hanamoura","Hollywood","Ilios",
+										      "KingsRow","lijiang","LunarColonie","Nepal","Numbani","oasis","route66",
+										      "volskaya","JunkerTown"};
 	
-	public static final HashMap<String,ImageIcon> HeroIconMap = new HashMap<>();
+	public static final String HERO_ICON_REP = "assets/img/heros/HeroIcon_",
+							   MAPS_ICON_REP = "assets/img/maps/";
+			
 	
-	{
-		HeroIconMap.put("ana", loadImageIcon(HERO_ICON_ANA));
-		HeroIconMap.put("moira", loadImageIcon(HERO_ICON_Moira));
-		HeroIconMap.put("junk", loadImageIcon(HERO_ICON_Junkrat));
+	public static final HashMap<String,Image> HeroIconMap = new HashMap<>(),
+						 					  MapsIconMap = new HashMap<>();
+	
+	public static void charger(){
+		
+		for ( String hero : heroListe )
+			HeroIconMap.put(hero, loadImage(HERO_ICON_REP + hero + ".png"));
+		
+		for ( String map : mapListe )
+			MapsIconMap.put(map, loadImage(MAPS_ICON_REP + map + ".png"));
 	}
 	
 	public static Image loadImage(String s){
@@ -42,7 +57,8 @@ class LoadRessource {
 	
 	public Image loadImage(String path){
 		
-		return new ImageIcon(getClass().getClassLoader().getResource(path)).getImage();
+		System.out.println(path);
+		return loadIcon(path).getImage();
 	}
 	
 	public ImageIcon loadIcon(String path){

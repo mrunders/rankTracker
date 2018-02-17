@@ -30,6 +30,10 @@ public class Componement_JTable extends JTable implements Themable{
 		this.setRowHeight(24);
 		this.setFont(new Font("Calisto MT", 2, 12));
 		this.setRowSelectionAllowed(true);
+		this.getColumnModel().getColumn(0).setPreferredWidth(70);
+		this.getColumnModel().getColumn(1).setPreferredWidth(4);
+		this.getColumnModel().getColumn(2).setPreferredWidth(4);
+		this.getColumnModel().getColumn(3).setPreferredWidth(188);
 		
 	}
 

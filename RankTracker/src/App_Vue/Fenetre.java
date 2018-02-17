@@ -1,10 +1,11 @@
 package App_Vue;
 
-import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import AutoCompletionPanel.ChaineConstructorPanel;
 import Componements.Componement_JTabbledPane;
 
 public class Fenetre extends JFrame implements Themable {
@@ -13,6 +14,7 @@ public class Fenetre extends JFrame implements Themable {
 	private Module[] modules;
 	
 	private Componement_JTabbledPane jtp;
+	private ChaineConstructorPanel ccp = new ChaineConstructorPanel(this);
 	
 	public Fenetre(Module[] modules) {
 		super();
@@ -29,8 +31,10 @@ public class Fenetre extends JFrame implements Themable {
 		}
 
 		this.jtp = new Componement_JTabbledPane(modules);
-		this.globalPan.add(this.jtp);
-
+		
+		this.globalPan.add(this.jtp, BorderLayout.NORTH);
+		this.globalPan.add(this.ccp, BorderLayout.SOUTH);
+		
 		this.setContentPane(this.globalPan);
 		this.revalidate();
 		this.repaint();
@@ -45,5 +49,12 @@ public class Fenetre extends JFrame implements Themable {
 		for (Module m : this.modules) {
 			m.adapte();
 		}
+		
+		this.ccp.adapte();
+	}
+	
+	public void ecraserTextField(String c){
+		
+		this.modules[this.jtp.getSelectedIndex()].forceModifierCmd(c);
 	}
 }

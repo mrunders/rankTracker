@@ -40,8 +40,8 @@ public class Controler extends AControler {
 		switch (sc.nextLine()) {
 		case("add"):
 			
-		this.calc.insert(Integer.parseInt(sc.nextLine()), sc.nextLine());
-		break;
+			this.calc.insert(Integer.parseInt(sc.nextLine()), sc.nextLine());
+			break;
 			
 		case("del"):
 			

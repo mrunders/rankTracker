@@ -1,30 +1,29 @@
 package App_Model;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import javax.swing.JFrame;
-
-import App_Controler.ResultHashSet;
-import App_Controler.ResultHashSet2;
-import Componements.Componement_StatsPanel;
+import App_Controler.TableauStorage;
 import JDBC_Interactions.JDBC_Connection;
 import JDBC_Interactions.JDBC_request;
 
 public class Model extends AModel {
 	
 	private String account;
-	private ResultHashSet rhs;
-	private String[][] data;
+	private TableauStorage tableauStorage;
 	
 	public Model(String acc) {
 		this.account = acc;
+		
+		Connection c = JDBC_Connection.connect(this.account);
+		this.tableauStorage = new TableauStorage(JDBC_request.allTab(c));
+		JDBC_Connection.Close(c);
 	}
 
 	@Override
 	public void importStats() {
 		
-		ResultHashSet rhs = new ResultHashSet();
 		Connection c;
 		
 		/*if (!new File(this.account+".db").exists()) {
@@ -34,20 +33,27 @@ public class Model extends AModel {
 			
 		} else*/ c = JDBC_Connection.connect(this.account);
 		
-		rhs.WorkAndFill(JDBC_request.allTab(c));
-		
-		this.notifyObserver(rhs.getDataTable(), rhs.getHashMap());
+		this.notifyObserver(this.tableauStorage.getTableau(), this.tableauStorage.getStatus());
 		JDBC_Connection.Close(c);
-		this.rhs = rhs; this.data = rhs.getDataTable();
 		
 	}
 
 	@Override
 	public void insert(int parseInt, String next) {
 		
+		String date; int diff;
 		Connection c = JDBC_Connection.connect(this.account);
-		JDBC_request.insertTab(c, parseInt, next);
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		
+		date = dtf.format(now).toString();
+		diff = -(JDBC_request.getPreviousRank(c)-parseInt);
+		
+		JDBC_request.insertTab(c, date, parseInt, diff, next);
 		JDBC_Connection.Close(c);
+		
+		this.tableauStorage.ajouterUneLigne(date, parseInt, diff, next);
 		
 	}
 
@@ -69,12 +75,14 @@ public class Model extends AModel {
 
 	@Override
 	public void filter(String nextLine, String modificateur) {
-		JFrame f = new JFrame();
+		/*JFrame f = new JFrame();
 		
 		f.setVisible(true);
 		f.setSize(400, 200);
 		f.setTitle(this.account + ":" + nextLine);
-		f.setContentPane(new Componement_StatsPanel(this.rhs.calculeHashMap(this.rhs.extractWithPick(nextLine, modificateur)), this.account + ":" + nextLine));	
+		f.setContentPane(new Componement_StatsPanel(this.rhs.calculeHashMap(this.rhs.extractWithPick(nextLine, 
+		                                     modificateur)), this.account + ":" + nextLine));	
+		*/
 	}
 
 	@Override

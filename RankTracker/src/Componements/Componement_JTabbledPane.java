@@ -12,13 +12,20 @@ public class Componement_JTabbledPane extends JTabbedPane {
 		
 		super(JTabbedPane.LEFT);
 		
+		
 		this.setBackground(ColorGUI.GLOBAL_BACKGROUND_COLOR);
+		
 		
 		int i=0;
 		for (Module gg : g) {
-			this.addTab(gg.getModuleName(),RESSOURCES.HeroIconMap.get("ana"), gg);
+			this.addTab(gg.getModuleName(),gg);
 			
 		}
+	}
+	
+	public int moduleIndex(){
+		
+		return super.getSelectedIndex();
 	}
 	
 

@@ -23,7 +23,7 @@ public class JDBC_request {
 		}
 	}
 	
-	private static int getPreviousRank(Connection c) {
+	public static int getPreviousRank(Connection c) {
 		
 		PreparedStatement stmt = null;
 		
@@ -35,17 +35,13 @@ public class JDBC_request {
 	}
 	
 	
-	public static boolean insertTab(Connection c, int rank, String pmain) {
+	public static boolean insertTab(Connection c, String date, int rank, int diff, String pmain) {
 		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		String date = dtf.format(now).toString();
 		PreparedStatement stmt;
-		int prank = -(getPreviousRank(c)-rank);
 		
 		try {
 			assert(!c.isClosed());
-			stmt = c.prepareStatement("insert into Rank values ('"+date+"',"+rank+","+prank+",'"+pmain+"');");
+			stmt = c.prepareStatement("insert into Rank values ('"+date+"',"+rank+","+diff+",'"+pmain+"');");
 			return stmt.execute();
 			
 		} catch (SQLException e) {

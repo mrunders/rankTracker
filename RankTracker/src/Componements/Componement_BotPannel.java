@@ -1,5 +1,6 @@
 package Componements;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,15 +16,15 @@ import App_Vue.Themable;
 
 public class Componement_BotPannel extends JPanel implements Observer, Themable {
 	
-	private Componement_EntryField entry = new Componement_EntryField();
-	private Componement_Button b = new Componement_Button("execute");
+	public Componement_EntryField entry = new Componement_EntryField();
+	private Componement_Button b = new Componement_Button("  execute  ");
 	private AControler ctrl;
 	
 	public Componement_BotPannel(AControler obs) {
 		
-		this.setLayout(new GridLayout(1,2,2,2));
-		this.add(this.entry); this.add(this.b);
 		this.ctrl = obs;
+		this.setLayout(new BorderLayout());
+		this.add(this.entry, BorderLayout.CENTER); this.add(this.b,BorderLayout.EAST);
 		this.b.addActionListener(new ActionListener() {
 		
 			@Override
@@ -32,6 +33,7 @@ public class Componement_BotPannel extends JPanel implements Observer, Themable 
 				Componement_BotPannel.this.initialiseTable();
 			}
 		});
+		
 	}
 	
 	public void initialiseTable() {

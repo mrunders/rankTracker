@@ -1,11 +1,11 @@
 package App_Vue;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.util.HashMap;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import App_Controler.AControler;
@@ -18,7 +18,9 @@ import Componements.Componement_StatsPanel;
 public class Module extends JPanel implements Observer, Themable {
 	
 	private String name;
-	private Componement_BotPannel botPanel;
+	private AControler controleur;
+
+	private Componement_BotPannel botPan;
 	private Componement_JScrollPane jspan;
 	private Componement_JTable table;
 	private Componement_StatsPanel statsPanel;
@@ -27,8 +29,8 @@ public class Module extends JPanel implements Observer, Themable {
 		super();
 		this.setLayout(new BorderLayout());
 		this.name = name;
-		this.botPanel = new Componement_BotPannel(controler);
-		
+		this.controleur = controler;
+		this.botPan = new Componement_BotPannel(controler);
 	}
 
 	@Override
@@ -41,27 +43,19 @@ public class Module extends JPanel implements Observer, Themable {
 		if (tab != null) {
 		
 			String[] title = {"date", "rank", "decay", "pick"};
-			TableModel tm;
-	
+
 			this.table = new Componement_JTable(tab, title);
 			jspan = new Componement_JScrollPane(this.table);
-			tm = this.table.getModel();
 			
-			for (int i = 0; i < tab.length; i++) {
-				if (tab[i][0] == "TODAY") {
-				}
-			}
-			
-
-			this.add( (this.table.getRowCount() <= 26)? this.table : jspan, BorderLayout.CENTER);
+			this.add( (this.table.getRowCount() <= 14)? this.table : jspan, BorderLayout.CENTER);
 		}
 		
 		
 		this.statsPanel = new Componement_StatsPanel(stats, this.name);
 		
 		this.add(this.statsPanel, BorderLayout.NORTH);
-		this.add(this.botPanel,BorderLayout.SOUTH);
-
+		this.add(this.botPan, BorderLayout.SOUTH);
+		this.setPreferredSize(new Dimension(500,540));
 		adapte();
 	}
 
@@ -78,8 +72,13 @@ public class Module extends JPanel implements Observer, Themable {
 		this.setBorder(BorderFactory.createLineBorder(ColorGUI.GLOBAL_TABLE_BORDER_COLOR,2));
 		
 		this.statsPanel.adapte();
-		this.botPanel.adapte();
+		this.botPan.adapte();
 
+	}
+	
+	public void forceModifierCmd(String c){
+		
+		this.botPan.entry.setText(c);
 	}
 	
 	public String getModuleName() {
@@ -88,7 +87,7 @@ public class Module extends JPanel implements Observer, Themable {
 	}
 	
 	public void initialiseTable() {
-		this.botPanel.initialiseTable();
+		this.controleur.importStats();
 	}
 	
 	public String[][] getNewTableData() {

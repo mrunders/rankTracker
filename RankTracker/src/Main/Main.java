@@ -9,11 +9,13 @@ import App_Vue.ColorGUI;
 import App_Vue.ColorGUI.ThemeTab;
 import App_Vue.Fenetre;
 import App_Vue.Module;
+import App_Vue.RESSOURCES;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		
+		RESSOURCES.charger();
 		
 		AModel model_main = new Model("main"); 
 		AControler controle_main = new Controler(model_main); 

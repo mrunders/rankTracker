@@ -1,6 +1,7 @@
 package Componements;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -18,6 +19,17 @@ public class Componement_Button extends JButton implements MouseListener, Themab
 	
 	public Componement_Button(String name) {
 		super(name);
+
+	}
+
+	public Componement_Button() {
+		this("");
+	}
+	
+	public Componement_Button(String name, Dimension d){
+		
+		this(name);
+		this.setPreferredSize(d);
 
 	}
 
