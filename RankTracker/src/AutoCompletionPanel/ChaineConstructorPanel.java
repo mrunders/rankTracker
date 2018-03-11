@@ -29,7 +29,7 @@ public class ChaineConstructorPanel extends JPanel implements Themable, ActionLi
 		this.setLayout(new BorderLayout());
 		
 		this.valider.addActionListener(this);
-		this.cote = new ElementCote(3300);
+		this.cote = new ElementCote(3400);
 		
 		try {
 			this.hero = new ListeImages(ListeImages.INSTANCE_HERO, RESSOURCES.heroListe);

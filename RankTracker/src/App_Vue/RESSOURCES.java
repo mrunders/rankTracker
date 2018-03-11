@@ -14,12 +14,12 @@ import App_Model.LISTE_HERO;
 
 public class RESSOURCES {
 	
-	public static final String[] heroListe = {"Ana","Bastion","Doomfist","Dva","Genji","Hanzo","Junkrat","Lucio","Mccree","Mei",
+	public static final String[] heroListe = {"Ana","Brigitte","Bastion","Doomfist","Dva","Genji","Hanzo","Junkrat","Lucio","Mccree","Mei",
 											  "Mercy","Moira","Orisa","Pharah","Reaper","Reinhardt","Roadhog","Soldier","Sombra",
 											  "Symmetra","Torbjorn","Tracer","Widowmaker","Winston","Zarya","Zenyatta"},
 								 mapListe  = {"Anubis","Dorado","einchenwald","Gibraltar","Hanamoura","Hollywood","Ilios",
 										      "KingsRow","lijiang","LunarColonie","Nepal","Numbani","oasis","route66",
-										      "volskaya","JunkerTown"};
+										      "volskaya","JunkerTown","BizzardWorld"};
 	
 	public static final String HERO_ICON_REP = "assets/img/heros/HeroIcon_",
 							   MAPS_ICON_REP = "assets/img/maps/";

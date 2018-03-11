@@ -55,7 +55,7 @@ abstract class APanneauImage extends JPanel implements Themable, MouseListener {
 		else 
 			g.setColor(ColorGUI.GLOBAL_MODULE_BACKGROUND_COLOR);
 		
-		g.fillRoundRect(0, 0, dimentionImage.width, dimentionImage.height, 10, 10);
+		g.fillRect(0, 0, dimentionImage.width, dimentionImage.height);
 		
 		g.drawImage(this.icon, 0, 0, dimentionImage.width, dimentionImage.height ,this);
 		
