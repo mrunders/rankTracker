@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;LISTE_HERO.java&apos; to &apos;RankTracker/src/App_Model&apos;&#x0D;&#x0A;- Original project: &apos;RankTracker&apos;&#x0D;&#x0A;- Destination element: &apos;RankTracker/src/App_Model&apos;&#x0D;&#x0A;- Original element: &apos;App_Vue.LISTE_HERO.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;App_Model" element1="/src&lt;App_Vue{LISTE_HERO.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1512908104444" units="1" version="1.0"/>
+</session>
