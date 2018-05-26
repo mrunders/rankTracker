@@ -21,7 +21,9 @@ abstract class APanneauImage extends JPanel implements Themable, MouseListener {
 	
 	public APanneauImage(String nom, Image img){
 		
-		this.nom = nom;
+		if ( nom.contains("HeroIcon_") ) nom = nom.substring(9);
+
+		this.nom = nom.substring(0, nom.length()-4);
 		this.icon = img;
 		this.addMouseListener(this);
 		this.setPreferredSize(dimentionImage);
